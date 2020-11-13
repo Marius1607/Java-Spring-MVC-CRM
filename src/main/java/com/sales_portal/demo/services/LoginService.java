@@ -15,19 +15,18 @@ import java.util.Optional;
 @Service
 public class LoginService implements UserDetailsService {
     private UserRepository userRepository;
-    private PendingUserRepository pendingUserRepository;
+        private PendingUserRepository pendingUserRepository;
 
     @Autowired
     public LoginService(UserRepository userRepository, PendingUserRepository pendingUserRepository) {
-        this.userRepository = userRepository;
-        this.pendingUserRepository = pendingUserRepository;
-    }
+            this.userRepository = userRepository;
+            this.pendingUserRepository = pendingUserRepository;
+        }
 
-
-    @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        Users u = userRepository.findByEmailAddress(s).orElseThrow(() -> new UsernameNotFoundException(s));
-        return new CustomUserDetails(u);
+        @Override
+        public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+            Users u = userRepository.findByEmailAddress(s).orElseThrow(() -> new UsernameNotFoundException(s));
+            return new CustomUserDetails(u);
     }
 
     public void validateUser(String a) {

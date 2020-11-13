@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Show All Companies</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/showCompanyList.css">
+
+</head>
+<body>
+
+
+<script>
+function searchKeyUp() {
+
+document.getElementById("formSearch").submit()
+document.getElementById("formSearch").focus();
+
+
+  }
+</script>
+
+<div class="main">
+
+    <ul>
+        <li><a th:href = "@{/mvc/contact/showAll}" href = "/showContactList.html">Contacts</a></li>
+        <li><a th:href = "@{/mvc/project/showAll}" > Projects</a></li>
+        <li><a th:href= "@{/mvc/tasks/showAll}" >Tasks</a></li>
+        <li><a th:href = "@{/mvc/help}" href="/help.html">Help</a></li>
+        <li><a th:href = "@{/login}" href = "/login.html">Logout</a></li>
+    </ul>
+</div>
+<ul class="add_comp">
+    <li class="add_comp"><a th:href = "@{/mvc/company/insert}" href="/insertCompany.html"> New company</a></li>
+</ul>
+
+<form name="search" th:action="@{/mvc/company/showAll}" method="post"
+      id="formSearch">
+    <input type="text" autofocus value="value text" onkeyup="searchKeyUp()"
+           name="search" id="search"
+           th:value="${search}" onfocus="var t = this.value; this.value = '';
+            this.value = t;"/>
+
+    <table class= "striped" >
+
+    <thead>
+    <tr>
+        <td>Company name</td>
+        <td>Website</td>
+        <td>Address</td>
+        <td>Phone Number</td>
+        <td>Invoicing details</td>
+        <td>Actions</td>
+    </tr>
+    </thead>
+
+    <tbody  th:each="c : ${company}">
+    <tr>
+    <td> <span th:text="${c.companyName}">Company name </span></td>
+        <td><span th:text="${c.company_website}">Website </span></td>
+    <td><span th:text="${c.company_address}">Address </span></td>
+    <td><span th:text="${c.phone_number}">Phone number </span></td>
+    <td><span th:text="${c.invoicing_details}">Invoicing details </span></td>
+    <td>
+        <a th:href="@{/mvc/company/{id}/delete(id=${c.company_id})}">
+            <img src="/img/del.png"  class = "deleteCompany"/>
+        </a>
+        <a th:href = "@{/mvc/company/{id}/modify(id=${c.company_id})}" href="/modifyCompany.html">Edit
+            <img class = "modifyCompany"/>
+        </a>
+    </td>
+
+    </tr>
+
+    </tbody>
+
+</table>
+
+</form>
+
+</body>
+
+</html>

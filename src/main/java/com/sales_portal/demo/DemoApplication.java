@@ -31,9 +31,7 @@ public class DemoApplication extends SpringBootServletInitializer implements Web
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-
 		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
-
 	}
 
 	@Bean

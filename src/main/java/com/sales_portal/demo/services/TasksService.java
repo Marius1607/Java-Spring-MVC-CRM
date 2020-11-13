@@ -11,7 +11,6 @@ import java.util.List;
 
 @Service("ITaskService")
 @AllArgsConstructor
-
 public class TasksService implements ITaskService {
     private TasksRepository tasksRepository;
 
